@@ -14,11 +14,6 @@ variable "organisation" {
   description = "The name of the organisation."
 }
 
-variable "quay_url" {
-  type        = string
-  description = "The URL of the Quay server"
-}
-
 variable "repository_name" {
   type        = string
   description = "The name of this repository."
@@ -27,4 +22,9 @@ variable "repository_name" {
 variable "repository_url" {
   type        = string
   description = "The HTML URL of this repository"
+}
+
+variable "certificate_arn" {
+  description = "the arn of the ssl certificate for this project"
+  type        = string
 }
