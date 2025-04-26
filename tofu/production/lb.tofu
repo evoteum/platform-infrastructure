@@ -5,4 +5,5 @@ module "aws_load_balancer" {
   subnet_ids      = module.aws_networking.public_subnet_ids
   certificate_arn = var.certificate_arn
   vpc_id          = module.aws_networking.vpc_id
+  project_id      = var.repository_id
 }

@@ -28,3 +28,8 @@ variable "certificate_arn" {
   description = "the arn of the ssl certificate for this project"
   type        = string
 }
+
+variable "repository_id" {
+  type        = string
+  description = "The GitHub API ID of this repository."
+}
