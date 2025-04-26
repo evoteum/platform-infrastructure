@@ -14,9 +14,6 @@ locals {
 module "github_variable" {
   source   = "github.com/evoteum/tofu-modules//github/variable"
   for_each = local.all_github_variables
-  depends_on = [
-    module.quay_repository
-  ]
 
   sensitive = each.value.sensitive
   scope     = each.value.scope
