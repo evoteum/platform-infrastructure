@@ -7,3 +7,7 @@ module "aws_load_balancer" {
   vpc_id          = module.aws_networking.vpc_id
   project_id      = var.repository_id
 }
+
+output "certificate_arn_debug" {
+  value = module.aws_load_balancer.certificate_arn_debug
+}
