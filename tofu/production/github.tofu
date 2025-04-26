@@ -1,13 +1,15 @@
 locals {
-  alb_variable = {
-    sensitive = false,
-    scope = "organisation",
-    name = "production_alb_dns_name",
-    value = module.aws_load_balancer.dns_name
+  alb_variables = {
+    "production_alb_dns_name" = {
+      sensitive = false
+      scope     = "organisation"
+      name      = "production_alb_dns_name"
+      value     = module.aws_load_balancer.dns_name
+    }
   }
 
   all_github_variables = merge(
-    local.alb_variable,
+    local.alb_variables,
   )
 }
 
