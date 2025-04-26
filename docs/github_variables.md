@@ -30,6 +30,7 @@ available for use within GitHub Actions here in the `platform-infrastructure` re
 - `FAIL_FAST`
 - `LANGUAGE_VERSION`
 - `PERMITTED_ENVIRONMENTS`
+- `PRODUCTION_ALB_DNS_NAME`
 - `QUAY_DOMAIN`
 - `QUAY_OAUTH2_USERNAME`
 - `QUAY_ROBOT_USERNAME`
