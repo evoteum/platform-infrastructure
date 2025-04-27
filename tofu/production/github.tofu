@@ -5,6 +5,12 @@ locals {
       scope     = "organisation"
       name      = "production_alb_dns_name"
       value     = module.aws_load_balancer.dns_name
+    },
+    "production_alb_https_listener_arn" = {
+      sensitive = false
+      scope     = "organisation"
+      name      = "production_alb_https_listener_arn"
+      value     = module.aws_load_balancer.https_listener_arn
     }
   }
 
