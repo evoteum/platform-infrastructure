@@ -1,21 +1,37 @@
 locals {
   alb_variables = {
-    "production_alb_dns_name" = {
+    "${local.environment}_alb_dns_name" = {
       sensitive = false
       scope     = "organisation"
-      name      = "production_alb_dns_name"
+      name      = "${local.environment}_alb_dns_name"
       value     = module.aws_load_balancer.dns_name
     },
-    "production_alb_https_listener_arn" = {
+    "${local.environment}_alb_https_listener_arn" = {
       sensitive = false
       scope     = "organisation"
-      name      = "production_alb_https_listener_arn"
+      name      = "${local.environment}_alb_https_listener_arn"
       value     = module.aws_load_balancer.https_listener_arn
+    },
+    "${local.environment}_alb_security_group_id" = {
+      sensitive = true
+      scope     = "organisation"
+      name      = "${local.environment}_alb_security_group_id"
+      value     = module.aws_load_balancer.security_group_id
+    }
+  }
+
+  ecs_variables = {
+    "${local.environment}_ecs_cluster_arn" = {
+      sensitive = true
+      scope     = "organisation"
+      name      = "${local.environment}_ecs_cluster_arn"
+      value     = module.aws_ecs_cluster.cluster_arn
     }
   }
 
   all_github_variables = merge(
     local.alb_variables,
+    local.ecs_variables,
   )
 }
 
