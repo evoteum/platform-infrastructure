@@ -1,4 +1,5 @@
 module "aws_load_balancer" {
+  count = 0
   source          = "github.com/evoteum/tofu-modules//aws/load_balancer"
   environment     = local.environment
   project_name    = var.repository_name
