@@ -12,8 +12,9 @@ terraform {
       version = "5.84.0"
     }
     cloudflare = {
-      source  = "cloudflare/cloudflare"
-      version = "5.1.0"
+      source = "cloudflare/cloudflare"
+      # Thow shalt not upgrade to v5 lest ye seeketh chaos, confusion and dragons. Ye be warned.
+      version = "4.52.0"
     }
     github = {
       source  = "integrations/github"
