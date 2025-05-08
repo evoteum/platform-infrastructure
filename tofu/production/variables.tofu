@@ -33,3 +33,8 @@ variable "repository_id" {
   type        = string
   description = "The GitHub API ID of this repository."
 }
+
+variable "homepage_url" {
+  type = string
+  description = "The web address of the project"
+}
