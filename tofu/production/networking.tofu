@@ -11,15 +11,3 @@ module "aws_certificate" {
   domain_name = var.homepage_url
 }
 
-
-resource "aws_acm_certificate_validation" "this" {
-  certificate_arn = module.aws_certificate.certificate_arn
-
-  validation_record_fqdns = [
-    for dvo in values(module.aws_certificate.domain_validation_options) :
-    dvo.name
-  ]
-  depends_on = [
-    module.cloudflare_record
-  ]
-}
