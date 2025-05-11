@@ -11,8 +11,18 @@ locals {
     }
   }
 
+  alb_dns_records = {
+    zone_id = module.cloudflare_zone.id
+    name    = "www"
+    type    = "CNAME"
+    value   = module.aws_load_balancer.dns_name
+    proxied = false
+    ttl     = 60
+  }
+
   all_dns_records = merge(
     local.certificate_dns_records,
+    local.alb_dns_records,
   )
 }
 
