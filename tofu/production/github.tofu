@@ -25,7 +25,7 @@ locals {
       sensitive = true
       scope     = "organisation"
       name      = "${local.environment}_public_subnet_ids"
-      value     = module.aws_networking.public_subnet_ids
+      value     = jsonencode(module.aws_networking.public_subnet_ids)
     }
   }
 
