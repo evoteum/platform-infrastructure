@@ -50,3 +50,5 @@ module "cloudflare_record" {
     ManagedBy      = "OpenTofu"
   }
 }
+
+

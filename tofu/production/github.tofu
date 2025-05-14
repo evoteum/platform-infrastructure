@@ -20,6 +20,15 @@ locals {
     }
   }
 
+  network_variables = {
+    "${local.environment}_public_subnet_ids" = {
+      sensitive = true
+      scope     = "organisation"
+      name      = "${local.environment}_public_subnet_ids"
+      value     = module.aws_networking.public_subnet_ids
+    }
+  }
+
   ecs_variables = {
     "${local.environment}_ecs_cluster_arn" = {
       sensitive = true
@@ -47,6 +56,7 @@ locals {
   all_github_variables = merge(
     local.alb_variables,
     local.ecs_variables,
+    local.network_variables,
   )
 }
 
