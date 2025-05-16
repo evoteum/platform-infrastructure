@@ -45,10 +45,10 @@ locals {
   vpc_variables = {
     for attr in local.vpc_attributes :
     "${local.environment}_vpc_${attr}" => {
-      sensitive = true
+      sensitive = false
       scope = "organisation"
       name  = "${local.environment}_vpc_${attr}"
-      value = lookup(module.aws_networking, "vpc_${attr}")
+      value = module.aws_networking["vpc_${attr}"]
     }
   }
 
@@ -57,6 +57,7 @@ locals {
     local.alb_variables,
     local.ecs_variables,
     local.network_variables,
+    local.vpc_variables,
   )
 }
 
