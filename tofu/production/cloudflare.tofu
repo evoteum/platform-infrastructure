@@ -1,7 +1,7 @@
 locals {
   certificate_dns_records = {
-    for dvo in module.aws_certificate.domain_validation_options :
-    dvo.name => {
+    for domain, dvo in module.aws_certificate.domain_validation_options :
+    domain => {
       zone_id = module.cloudflare_zone.id
       name    = dvo.name
       type    = dvo.type
