@@ -36,9 +36,15 @@ Shared infrastructure for the Evoteum platform
 [//]: # (A detailed description of the repo)
 
 
-This repository contains the core infrastructure that powers the Evoteum estate. It defines and provisions the shared platform resources necessary for application deployment across all environments. These shared components include ECS clusters, application load balancers, networking, and related foundational infrastructure services.
+This repository provisions the AWS-based shared platform resources for the Evoteum
+estate: ECS clusters, application load balancers, networking, and ACM certificates.
 
-The primary goal of this repository is to automate the golden path to deployment for all services. With minimal configuration, developers should be able to deploy their services without needing to understand the underlying infrastructure.
+The platform has been migrated onto a self-hosted, bare-metal Kubernetes cluster, with
+Cloudflare Tunnels handling ingress instead of an ALB and public DNS/ACM certificates.
+As a result, this repository currently provisions no live AWS infrastructure; the
+ECS/ALB/VPC resources it previously managed have been destroyed and removed from
+configuration, but it remains the intended home for any shared AWS resources should the
+estate need them again.
 
 
 ## Table of Contents
@@ -59,38 +65,25 @@ The primary goal of this repository is to automate the golden path to deployment
 [//]: # (OPTIONAL)
 [//]: # (May go here if it is important to highlight security concerns.)
 
-As deployment is centrally automated, security considerations are also managed centrally. This ensures improvements are deployed as swiftly as everything else.
+As deployment is centrally automated, security considerations are also managed
+centrally. This ensures improvements are deployed as swiftly as everything else.
 
 ## Background
 [//]: # (OPTIONAL)
 [//]: # (Explain the motivation and abstract dependencies for this repo)
 
-The vision is simple: any repository that wants to be deployed should only need to declare:
+The vision is simple: developers should not need to care how their application is
+running, only that their service is securely reachable at its configured domain.
 
-```yaml
-deploy: true
-```
+That golden path is now delivered by a self-hosted, bare-metal Kubernetes cluster
+rather than the AWS ECS/ALB stack this repository used to manage. Ingress and TLS are
+handled by Cloudflare Tunnels, removing the need for a public-facing load balancer,
+VPC, or ACM certificate.
 
-in its corresponding entry in estate-config/repos.yml, and the platform handles the rest.
-
-This triggers:
-- Allocation of ECS capacity in the relevant environment
-- ALB routing and secure TLS termination
-- DNS configuration and HTTPS redirection
-- Health checks and secure environment injection
-- Role-based access to dependent services such as DynamoDB or S3
-
-The developer should not need to care how the application is running, only that their service is securely reachable via its configured domain.
-
-
-This repository is responsible for:
-- Provisioning and managing ECS clusters (one per environment)
-- Provisioning and managing application load balancers
-- Wiring up common networking components (VPC, subnets, security groups)
-- Enabling service-specific routing, domain configuration, and certificate management
-- Centralising platform-level permissions and access control
-
-Although ECS is currently used as the deployment target, the infrastructure is designed to be cloud-agnostic and orchestration-neutral. In future, as scale demands, the platform will transition to Kubernetes, likely using an OpenStack provider. Applications opting into the golden path should not require any changes during such transitions.
+This repository's OpenTofu configuration currently provisions nothing: the ECS
+clusters, load balancers, networking, and certificates it used to manage have been
+decommissioned. It remains the shared-infrastructure repository for the estate, ready
+to provision AWS resources again if a future need arises.
 
 
 

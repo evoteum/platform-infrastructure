@@ -11,22 +11,6 @@ terraform {
       source  = "hashicorp/aws"
       version = "5.84.0"
     }
-    cloudflare = {
-      source = "cloudflare/cloudflare"
-      # Thow shalt not upgrade to v5 lest ye seeketh chaos, confusion and dragons. Ye be warned.
-      version = "4.52.0"
-    }
-    github = {
-      source  = "integrations/github"
-      version = "6.5.0"
-    }
-    random = {
-      source  = "hashicorp/random"
-      version = "3.6.0"
-    }
-    quay = {
-      source = "registry.terraform.io/enthought/quay"
-    }
   }
 }
 
@@ -41,17 +25,4 @@ provider "aws" {
       RepositoryID  = var.repository_id
     }
   }
-}
-
-provider "cloudflare" {
-}
-
-provider "github" {
-  owner = var.organisation
-  # Using `GITHUB_APP_XXX` environment variables in CI
-  app_auth {}
-}
-
-provider "quay" {
-  url = var.quay_url
 }
